@@ -47,7 +47,7 @@ app.use(actuator(options))
 // get image list
 let images = []
 try {
-    images = await getImageList('fan', apikey)
+    images = await getImageList(topic, apikey)
     console.log('retrieved list of images to use')
     console.log('size of dataset is ' + images.length)
 } catch (error) {
