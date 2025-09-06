@@ -21,4 +21,4 @@ jobs:
           az account show
           az group list
           pwd
-          az containerapp revision restart -n ca-randomfan-prod-uks-001 -g rg-randomfan-prod-uks-001 --revision ca-randomfan-prod-uks-001--k1xr3gd
+          az containerapp revision restart -n ca-randomfan-prod-uks-001 -g rg-randomfan-prod-uks-001
