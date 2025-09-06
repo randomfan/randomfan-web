@@ -9,7 +9,7 @@ import path from 'path'
 import Graceful from '@ladjs/graceful'
 import actuator from 'express-actuator'
 import { fileURLToPath } from 'url'
-import BingSearchApi from './bing.mjs'
+import getImageList from './lib/serpapi.mjs'
 
 /**
  * App Variables
@@ -17,8 +17,7 @@ import BingSearchApi from './bing.mjs'
 
 const app = express();
 const port = process.env.PORT || '8000'
-const bingSearchSubscriptionKey = process.env.BING_SEARCH_API_KEY
-const bingSearchSafeSearch = process.env.BING_SEARCH_SAFE
+const apikey = process.env.SERP_API_KEY
 const topic = process.env.TOPIC ?? 'fan'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -46,10 +45,9 @@ const options = {
 app.use(actuator(options))
 
 // get image list
-const api = new BingSearchApi({key: bingSearchSubscriptionKey, safeSearch: bingSearchSafeSearch})
 let images = []
 try {
-    images = await api.getImageList(topic, 200)
+    images = await getImageList('fan', apikey)
     console.log('retrieved list of images to use')
     console.log('size of dataset is ' + images.length)
 } catch (error) {
